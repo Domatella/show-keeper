@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TvShows.Models.UserShowsView>
+
+@{
+    ViewBag.Title = "Мои Сериалы";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+
+        <p>
+            @Html.ActionLink("Добавить", "Index", "Shows")
+        </p>
+
+        @if (Model.Count() != 0)
+        {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Season)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Episode)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Details", "Shows", new { id = item.ShowId })">
+                        @Html.DisplayFor(modelItem => item.Name)</a>                      
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Season)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Episode)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Изменить", "Edit", new { id = item.ShowEpisodeId, name = item.Name }) |
+                        @Html.ActionLink("Детали", "Details", item) |
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.ShowEpisodeId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        }
+
+        else
+        {
+            <h3>Вы еще не добавили сериалы</h3>
+        }
+    </div>
+</div>
