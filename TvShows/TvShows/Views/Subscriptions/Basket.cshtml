@@ -37,7 +37,7 @@
                         @{ViewBag.Total += item.Price;}
                     </td>
                     <td>
-                        @Html.ActionLink("Удалить из корзины", "Bucket", new { subscriptionId = item.Id, isDeleting = true })
+                        @Html.ActionLink("Удалить из корзины", "Basket", new { subscriptionId = item.Id, isDeleting = true })
                     </td>
                 </tr>
             }

@@ -156,19 +156,8 @@ namespace TvShows.Controllers
         }
 
         [Authorize()]
-        private ActionResult bucket()
+        private ActionResult basket()
         {
-            //string userId = getUserId();
-            //Purchase currentPurchase;
-            //if (db.Purchases.Count() != 0)
-            //{
-            //    currentPurchase = db.Purchases.First(p => p.IsActive == true);
-            //}
-            //else
-            //{
-            //    currentPurchase = null;
-            //}
-
             var userId = getUserId();
             var currentPurchase = getCurrentPurchase(userId);
 
@@ -178,45 +167,17 @@ namespace TvShows.Controllers
             }
             else
             {
-                //var subscriptionsInBucket = (from us in db.UserSubscriptions
-                //                             join subscription in db.Subscriptions on us.SubscriptionId equals subscription.Id
-                //                             where us.PurchaseId == currentPurchase.PurchaseId &&
-                //                             us.UserId == userId
-                //                             select new
-                //                             {
-                //                                 Id = subscription.Id,
-                //                                 Name = subscription.Name,
-                //                                 ImageUrl = subscription.ImageUrl,
-                //                                 Price = subscription.Price
-                //                             }).AsEnumerable().Select(x => new Subscription()
-                //                             {
-                //                                 Id = x.Id,
-                //                                 Name = x.Name,
-                //                                 ImageUrl = x.ImageUrl,
-                //                                 Price = x.Price
-                //                             });
-
                 return View(getSubsInBucket(currentPurchase.PurchaseId, userId));
             }
         }
 
         [Authorize()]
-        public ActionResult Bucket(int subscriptionId, bool isDeleting = false)
+        public ActionResult Basket(int subscriptionId, bool isDeleting = false)
         {
             if (subscriptionId == -1)
             {
-                return bucket();
+                return basket();
             }
-            //string userId = getUserId();
-            //Purchase currentPurchase;
-            //if (db.Purchases.Count() != 0)
-            //{
-            //    currentPurchase = db.Purchases.First(p => p.IsActive == true);
-            //}
-            //else
-            //{
-            //    currentPurchase = null;
-            //}
 
             var userId = getUserId();
             var currentPurchase = getCurrentPurchase(userId);
@@ -264,24 +225,6 @@ namespace TvShows.Controllers
                 db.UserSubscriptions.Remove(deletingItem);
                 db.SaveChanges();
             }
-
-            //var subscriptionsInBucket = (from us in db.UserSubscriptions
-            //                             join subscription in db.Subscriptions on us.SubscriptionId equals subscription.Id
-            //                             where us.PurchaseId == currentPurchase.PurchaseId &&
-            //                             us.UserId == userId
-            //                             select new
-            //                             {
-            //                                 Id = subscription.Id,
-            //                                 Name = subscription.Name,
-            //                                 ImageUrl = subscription.ImageUrl,
-            //                                 Price = subscription.Price
-            //                             }).AsEnumerable().Select(x => new Subscription()
-            //                             {
-            //                                 Id = x.Id,
-            //                                 Name = x.Name,
-            //                                 ImageUrl = x.ImageUrl,
-            //                                 Price = x.Price
-            //                             });
 
             return View(getSubsInBucket(currentPurchase.PurchaseId, userId));
         }

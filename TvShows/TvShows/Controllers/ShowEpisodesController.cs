@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using TvShows.Models;
 using Microsoft.AspNet.Identity;
 using System.Security.Claims;
+using System.Text;
 
 namespace TvShows.Controllers
 {
@@ -81,13 +82,16 @@ namespace TvShows.Controllers
         [Authorize()]
         public ActionResult Create([Bind(Include = "ShowEpisodeId,UserId,ShowId,Season,Episode")] ShowEpisode showEpisode)
         {
-            if (ModelState.IsValid)
+            StringBuilder message = new StringBuilder();
+            if (ModelState.IsValid && 
+                checkEpisodeData(showEpisode.Episode, showEpisode.Season, showEpisode.ShowId, message))
             {
                 db.ShowEpisodes.Add(showEpisode);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Message = message;
             return View(showEpisode);
         }
 
@@ -117,12 +121,16 @@ namespace TvShows.Controllers
         [Authorize()]
         public ActionResult Edit([Bind(Include = "ShowEpisodeId,UserId,ShowId,Season,Episode")] ShowEpisode showEpisode)
         {
-            if (ModelState.IsValid)
+            StringBuilder message = new StringBuilder();
+            if (ModelState.IsValid && 
+                checkEpisodeData(showEpisode.Episode, showEpisode.Season, showEpisode.ShowId, message))
             {
                 db.Entry(showEpisode).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Message = message;
             return View(showEpisode);
         }
 
@@ -139,6 +147,7 @@ namespace TvShows.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Name = db.Shows.Find(id).Name;
             return View(showEpisode);
         }
 
@@ -161,6 +170,22 @@ namespace TvShows.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool checkEpisodeData(int episode, int season, int id, StringBuilder message)
+        {
+            Show show = db.Shows.Find(id);
+            if (episode > show.Series)
+            {
+                message.Append($"Номер серии не может быть больше общего количества: {show.Series}. ");
+            }
+
+            if (season > show.Seasons)
+            {
+                message.Append($"Номер сезона не может быть больше общего количества: {show.Seasons}");
+            }
+
+            return (message.Length == 0);
         }
     }
 }
