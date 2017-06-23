@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TvShows.BLL.DTO
 {
-    public class BucketDTO
+    public class BasketDTO
     {
         public int UserId { get; set; }
         public int PurchaseId { get; set; }
         public List<UserSubscriptionDTO> UserSubscriptionsList { get; set; }
 
-        public BucketDTO()
+        public BasketDTO()
         {
             UserSubscriptionsList = new List<UserSubscriptionDTO>();
         }

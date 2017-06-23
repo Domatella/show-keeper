@@ -37,6 +37,7 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,10 +47,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\BasketDTO.cs" />
+    <Compile Include="DTO\PurchaseDTO.cs" />
+    <Compile Include="DTO\ShowDTO.cs" />
+    <Compile Include="DTO\ShowEpisodeDTO.cs" />
+    <Compile Include="DTO\SubscriptionDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="DTO\UserShowsViewDTO.cs" />
+    <Compile Include="DTO\UserSubscriptionDTO.cs" />
+    <Compile Include="Infrastructure\ServiceModule.cs" />
+    <Compile Include="Interfaces\IShowEpisodesService.cs" />
+    <Compile Include="Interfaces\IShowsService.cs" />
+    <Compile Include="Interfaces\ISubscriptionsService.cs" />
+    <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ShowEpisodesService.cs" />
+    <Compile Include="Services\ShowsService.cs" />
+    <Compile Include="Services\SubscriptionsService.cs" />
+    <Compile Include="Services\UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TvShows.DAL\TvShows.DAL.csproj">
+      <Project>{8a3770c9-a4fa-4eb8-933f-692772e7db47}</Project>
+      <Name>TvShows.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

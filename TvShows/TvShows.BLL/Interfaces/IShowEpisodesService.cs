@@ -9,8 +9,8 @@ namespace TvShows.BLL.Interfaces
 {
     public interface IShowEpisodesService
     {
-        ShowEpisodeDTO GetShowEpisode(int? id);
-        UserShowsViewDTO GetUsersShows(int? userId);
+        ShowEpisodeDTO GetShowEpisode(int id);
+        UserShowsViewDTO GetUsersShows(int userId);
         void Create(ShowEpisodeDTO showEpisode);
         void Delete(int id);
         void Update(ShowEpisodeDTO showEpisode);

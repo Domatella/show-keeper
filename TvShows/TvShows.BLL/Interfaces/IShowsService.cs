@@ -9,7 +9,7 @@ namespace TvShows.BLL.Interfaces
 {
     public interface IShowsService
     {
-        ShowDTO GetShow(int? id);
+        ShowDTO GetShow(int id);
         IEnumerable<ShowDTO> GetShows();
         void Create(ShowDTO show);
         void Delete(int id);

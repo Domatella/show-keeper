@@ -9,9 +9,8 @@ namespace TvShows.BLL.Interfaces
 {
     public interface ISubscriptionsService
     {
-        SubscriptionDTO GetSubscription(int? id);
-        IEnumerable<SubscriptionDTO> GetSubscriptions();
-        BucketDTO GetBucket(int? userId);
+        SubscriptionDTO GetSubscription(int id);
+        BasketDTO GetBasket(int userId);
         void Create(SubscriptionDTO subscription);
         void Update(SubscriptionDTO subscription);
         void Delete(int id);

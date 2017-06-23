@@ -38,14 +38,9 @@ namespace TvShows.BLL.Services
             db.Dispose();
         }
 
-        public ShowDTO GetShow(int? id)
+        public ShowDTO GetShow(int id)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            var show = db.Shows.Get(id.Value);
+            var show = db.Shows.Get(id);
 
             if (show == null)
             {

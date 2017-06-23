@@ -37,9 +37,9 @@ namespace TvShows.DAL.Repositories
             return db.Purchases.Where(predicate).ToList();
         }
 
-        public Purchase Get(int id)
+        public Purchase Get(int userId)
         {
-            return db.Purchases.Find(id);
+            return db.Purchases.Single(p => (p.UserId == userId) && !p.IsPaid);
         }
 
         public IEnumerable<Purchase> GetAll()

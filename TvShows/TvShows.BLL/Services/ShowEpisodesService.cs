@@ -38,14 +38,9 @@ namespace TvShows.BLL.Services
             db.Dispose();
         }
 
-        public ShowEpisodeDTO GetShowEpisode(int? id)
+        public ShowEpisodeDTO GetShowEpisode(int id)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            var showEpisode = db.ShowEpisodes.Get(id.Value);
+            var showEpisode = db.ShowEpisodes.Get(id);
 
             if (showEpisode == null)
             {
@@ -56,12 +51,12 @@ namespace TvShows.BLL.Services
             return Mapper.Map<ShowEpisodeDTO>(showEpisode);
         }
 
-        public UserShowsViewDTO GetUsersShows(int? userId)
+        public UserShowsViewDTO GetUsersShows(int userId)
         {
             var usersShowView = new UserShowsViewDTO();
             Mapper.Initialize(cfg => cfg.CreateMap<ShowEpisode, ShowEpisodeDTO>());
             var showsEpisodes = Mapper.Map<IEnumerable<ShowEpisode>, IEnumerable<ShowEpisodeDTO>>(db.ShowEpisodes.GetAll()
-                .Where(se => se.UserId == userId.Value));
+                .Where(se => se.UserId == userId));
 
             Mapper.Initialize(cfg => cfg.CreateMap<Show, ShowDTO>());
 
