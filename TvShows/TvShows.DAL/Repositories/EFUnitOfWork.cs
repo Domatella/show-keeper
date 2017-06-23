@@ -9,7 +9,7 @@ using TvShows.DAL.Interfaces;
 
 namespace TvShows.DAL.Repositories
 {
-    class EFUnitOfWork : IUnitOfWork
+    public class EFUnitOfWork : IUnitOfWork
     {
         private KeeperContext db;
 
@@ -25,21 +25,108 @@ namespace TvShows.DAL.Repositories
             db = new KeeperContext(connectionString);
         }
 
-        public IRepository<Show> Shows => throw new NotImplementedException();
+        public IRepository<Show> Shows
+        {
+            get
+            {
+                if (showRepository == null)
+                {
+                    showRepository = new ShowsRepository(db);
+                }
 
-        public IRepository<ShowEpisode> ShowEpisodes => throw new NotImplementedException();
+                return showRepository;
+            }
+        }
 
-        public IRepository<Purchase> Purchases => throw new NotImplementedException();
+        public IRepository<ShowEpisode> ShowEpisodes
+        {
+            get
+            {
+                if (showEpisodesRepository == null)
+                {
+                    showEpisodesRepository = new ShowEpisodesRepository(db);
+                }
 
-        public IRepository<Subscription> Subscriptions => throw new NotImplementedException();
+                return showEpisodesRepository;
+            }
+        }
 
-        public IRepository<UserSubscription> UserSubscriptions => throw new NotImplementedException();
+        public IRepository<Purchase> Purchases
+        {
+            get
+            {
+                if (purchasesRepository == null)
+                {
+                    purchasesRepository = new PurchasesRepository(db);
+                }
 
-        public IRepository<User> Users => throw new NotImplementedException();
+                return purchasesRepository;
+            }
+        }
+
+        public IRepository<Subscription> Subscriptions
+        {
+            get
+            {
+                if (subscriptionsRepository == null)
+                {
+                    subscriptionsRepository = new SubscriptionsRepository(db);
+                }
+
+                return subscriptionsRepository;
+            }
+        }
+
+        public IRepository<UserSubscription> UserSubscriptions
+        {
+            get
+            {
+                if (userSubscriptionsRepository == null)
+                {
+                    userSubscriptionsRepository = new UserSubscriptionsRepository(db);
+                }
+
+                return userSubscriptionsRepository;
+            }
+        }
+
+        public IRepository<User> Users
+        {
+            get
+            {
+                if (usersRepository == null)
+                {
+                    usersRepository = new UsersRepository(db);
+                }
+
+                return usersRepository;
+            }
+        }
+
+        public void Save()
+        {
+            db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+
+                disposed = true;
+            }
+        }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

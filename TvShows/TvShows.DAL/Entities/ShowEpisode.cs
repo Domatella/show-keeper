@@ -12,7 +12,7 @@ namespace TvShows.DAL.Entities
         public int Id { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         public int ShowId { get; set; }

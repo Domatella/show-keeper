@@ -5,15 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TvShows.DAL.Entities
+namespace TvShows.BLL.DTO
 {
-    public class UserSubscription
+    public class PurchaseDTO
     {
         public int Id { get; set; }
 
         [Required]
         public int UserId { get; set; }
-        public int PurchaseId { get; set; }
-        public int SubsciptionId { get; set; }
+
+        public int ItemsQuantity { get; set; }
+        public bool IsPaid { get; set; }
     }
 }

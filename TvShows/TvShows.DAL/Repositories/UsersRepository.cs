@@ -9,7 +9,7 @@ using TvShows.DAL.Interfaces;
 
 namespace TvShows.DAL.Repositories
 {
-    class UsersRepository : IRepository<User>
+    public class UsersRepository : IRepository<User>
     {
         private KeeperContext db;
 

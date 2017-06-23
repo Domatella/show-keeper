@@ -7,7 +7,7 @@ using TvShows.DAL.Entities;
 
 namespace TvShows.DAL.Interfaces
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IRepository<Show> Shows { get; }
         IRepository<ShowEpisode> ShowEpisodes { get; }
@@ -15,5 +15,6 @@ namespace TvShows.DAL.Interfaces
         IRepository<Subscription> Subscriptions { get; }
         IRepository<UserSubscription> UserSubscriptions { get; }
         IRepository<User> Users { get; }
+        void Save();
     }
 }
