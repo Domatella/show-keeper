@@ -52,7 +52,6 @@
     <Compile Include="Entities\Show.cs" />
     <Compile Include="Entities\ShowEpisode.cs" />
     <Compile Include="Entities\Subscription.cs" />
-    <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserSubscription.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="Repositories\ShowEpisodesRepository.cs" />
     <Compile Include="Repositories\ShowsRepository.cs" />
     <Compile Include="Repositories\SubscriptionsRepository.cs" />
-    <Compile Include="Repositories\UsersRepository.cs" />
     <Compile Include="Repositories\UserSubscriptionsRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,11 +10,13 @@ namespace TvShows.BLL.DTO
     {
         public int UserId { get; set; }
         public int PurchaseId { get; set; }
-        public List<UserSubscriptionDTO> UserSubscriptionsList { get; set; }
+        public List<SubscriptionDTO> SubscriptionsList { get; set; }
 
         public BasketDTO()
         {
-            UserSubscriptionsList = new List<UserSubscriptionDTO>();
+            SubscriptionsList = new List<SubscriptionDTO>();
         }
     }
+
+
 }

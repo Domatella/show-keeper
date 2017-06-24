@@ -18,7 +18,6 @@ namespace TvShows.DAL.Repositories
         private PurchasesRepository purchasesRepository;
         private SubscriptionsRepository subscriptionsRepository;
         private UserSubscriptionsRepository userSubscriptionsRepository;
-        private UsersRepository usersRepository;
 
         public EFUnitOfWork(string connectionString)
         {
@@ -87,19 +86,6 @@ namespace TvShows.DAL.Repositories
                 }
 
                 return userSubscriptionsRepository;
-            }
-        }
-
-        public IRepository<User> Users
-        {
-            get
-            {
-                if (usersRepository == null)
-                {
-                    usersRepository = new UsersRepository(db);
-                }
-
-                return usersRepository;
             }
         }
 

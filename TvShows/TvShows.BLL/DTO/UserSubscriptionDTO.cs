@@ -12,7 +12,6 @@ namespace TvShows.BLL.DTO
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; }
         public int PurchaseId { get; set; }
         public int SubscriptionId { get; set; }
     }

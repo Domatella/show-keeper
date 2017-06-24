@@ -14,7 +14,6 @@ namespace TvShows.DAL.Interfaces
         IRepository<Purchase> Purchases { get; }
         IRepository<Subscription> Subscriptions { get; }
         IRepository<UserSubscription> UserSubscriptions { get; }
-        IRepository<User> Users { get; }
         void Save();
     }
 }

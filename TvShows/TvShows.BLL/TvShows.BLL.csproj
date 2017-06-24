@@ -52,19 +52,16 @@
     <Compile Include="DTO\ShowDTO.cs" />
     <Compile Include="DTO\ShowEpisodeDTO.cs" />
     <Compile Include="DTO\SubscriptionDTO.cs" />
-    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\UserShowsViewDTO.cs" />
     <Compile Include="DTO\UserSubscriptionDTO.cs" />
     <Compile Include="Infrastructure\ServiceModule.cs" />
     <Compile Include="Interfaces\IShowEpisodesService.cs" />
     <Compile Include="Interfaces\IShowsService.cs" />
     <Compile Include="Interfaces\ISubscriptionsService.cs" />
-    <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ShowEpisodesService.cs" />
     <Compile Include="Services\ShowsService.cs" />
     <Compile Include="Services\SubscriptionsService.cs" />
-    <Compile Include="Services\UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

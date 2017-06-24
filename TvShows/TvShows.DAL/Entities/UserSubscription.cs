@@ -12,7 +12,6 @@ namespace TvShows.DAL.Entities
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; }
         public int PurchaseId { get; set; }
         public int SubsciptionId { get; set; }
     }

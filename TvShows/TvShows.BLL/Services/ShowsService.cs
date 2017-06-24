@@ -53,8 +53,12 @@ namespace TvShows.BLL.Services
 
         public IEnumerable<ShowDTO> GetShows()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Show, ShowDTO>());
-            return Mapper.Map<IEnumerable<Show>, IEnumerable<ShowDTO>>(db.Shows.GetAll());
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Show, ShowDTO>().ReverseMap();
+            });
+            var shows = Mapper.Map<IEnumerable<Show>, IEnumerable<ShowDTO>>(db.Shows.GetAll());
+            return shows;
         }
 
         public void Update(ShowDTO show)
