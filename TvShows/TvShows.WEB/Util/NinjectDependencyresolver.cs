@@ -28,7 +28,7 @@ namespace TvShows.WEB.Util
         }
         private void AddBindings()
         {
-            kernel.Bind<IShowsService>().To<ShowsService>();
+            kernel.Bind<IShowsEpisodeService>().To<ShowsService>();
             kernel.Bind<IShowEpisodesService>().To<ShowEpisodesService>();
             kernel.Bind<ISubscriptionsService>().To<SubscriptionsService>();
         }

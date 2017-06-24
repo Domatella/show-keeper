@@ -11,7 +11,7 @@ using TvShows.DAL.Entities;
 
 namespace TvShows.BLL.Services
 {
-    public class ShowsService : IShowsService
+    public class ShowsService : IShowsEpisodeService
     {
         private IUnitOfWork db { get; set; }
 

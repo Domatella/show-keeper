@@ -13,8 +13,8 @@ namespace TvShows.WEB.Controllers
 {
     public class ShowController : Controller
     {
-        private IShowsService db { get; set; }
-        public ShowController(IShowsService showsService)
+        private IShowsEpisodeService db { get; set; }
+        public ShowController(IShowsEpisodeService showsService)
         {
             db = showsService;
         }
@@ -23,11 +23,7 @@ namespace TvShows.WEB.Controllers
         {
             int pageSize = 5;
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<ShowDTO, ShowViewModel>().ReverseMap();
-                cfg.CreateMap<IEnumerable<ShowDTO>, IEnumerable<ShowViewModel>>();
-            });
+            Mapper.Initialize(cfg => cfg.CreateMap<ShowDTO, ShowViewModel>().ReverseMap());
             var shows = Mapper.Map<IEnumerable<ShowDTO>, IEnumerable<ShowViewModel>>(db.GetShows());
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -48,7 +44,7 @@ namespace TvShows.WEB.Controllers
             }
 
             Mapper.Initialize(cfg => cfg.CreateMap<ShowDTO, ShowViewModel>());
-            var show = Mapper.Map<ShowViewModel>(db.GetShow(id.Value));
+            var show = Mapper.Map<ShowDTO, ShowViewModel>(db.GetShow(id.Value));
             if (show == null)
             {
                 return HttpNotFound();
