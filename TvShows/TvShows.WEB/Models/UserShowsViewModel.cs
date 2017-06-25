@@ -10,6 +10,11 @@ namespace TvShows.WEB.Models
     {
         public int UserId { get; set; }
         public List<UserShow> UserShowsList { get; set; }
+
+        public UserShowsViewModel()
+        {
+            UserShowsList = new List<UserShow>();
+        }
     }
 
     public class UserShow

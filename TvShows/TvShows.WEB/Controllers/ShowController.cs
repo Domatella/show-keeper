@@ -23,8 +23,20 @@ namespace TvShows.WEB.Controllers
         {
             int pageSize = 5;
 
-            Mapper.Initialize(cfg => cfg.CreateMap<ShowDTO, ShowViewModel>().ReverseMap());
-            var shows = Mapper.Map<IEnumerable<ShowDTO>, IEnumerable<ShowViewModel>>(db.GetShows());
+            var shows = new List<ShowViewModel>();
+            var dbShows = db.GetShows();
+            foreach(var show in dbShows)
+            {
+                shows.Add(new ShowViewModel
+                {
+                    Id = show.Id,
+                    Name = show.Name,
+                    Seasons = show.Seasons,
+                    Episodes = show.Episodes,
+                    Description = show.Description
+                });
+            }
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 shows = shows.Where(show => show.Name.ToLower().Contains(searchString.ToLower())).ToList();
@@ -43,12 +55,20 @@ namespace TvShows.WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Mapper.Initialize(cfg => cfg.CreateMap<ShowDTO, ShowViewModel>());
-            var show = Mapper.Map<ShowDTO, ShowViewModel>(db.GetShow(id.Value));
-            if (show == null)
+            var dbShow = db.GetShow(id.Value);
+            if (dbShow == null)
             {
                 return HttpNotFound();
             }
+
+            var show = new ShowViewModel
+            {
+                Id = dbShow.Id,
+                Name = dbShow.Name,
+                Seasons = dbShow.Seasons,
+                Episodes = dbShow.Episodes,
+                Description = dbShow.Description
+            };
             return View(show);
         }
 

@@ -10,7 +10,7 @@
 
 
         <p>
-            @Html.ActionLink("Добавить", "Index", "Shows")
+            @Html.ActionLink("Добавить", "Index", "Show")
         </p>
 
         @if (Model.UserShowsList.Count() != 0)
@@ -33,7 +33,7 @@
                 {
                     <tr>
                         <td>
-                            <a href="@Url.Action("Details", "Shows", new { id = item.ShowId })">
+                            <a href="@Url.Action("Details", "Show", new { id = item.ShowId })">
                                 @Html.DisplayFor(modelItem => item.Name)
                             </a>
                         </td>

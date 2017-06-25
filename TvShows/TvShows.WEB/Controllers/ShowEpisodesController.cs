@@ -24,15 +24,19 @@ namespace TvShows.WEB.Controllers
         // GET: ShowEpisodes
         public ActionResult Index()
         {
-            Mapper.Initialize(cfg =>
+            var dbUserShows = db.GetUsersShows(USER_ID);
+            var userShows = new UserShowsViewModel() { UserId = dbUserShows.UserId };
+            foreach (var show in dbUserShows.UserShowsList)
             {
-                cfg.CreateMap<UserShowDTO, UserShow>();
-                cfg.CreateMap<UserShowsViewDTO, UserShowsViewModel>()
-                    .ForMember(x => x.UserShowsList,
-                               x => x.MapFrom(list => Mapper.Map<IEnumerable<UserShowDTO>, 
-                                                                 IEnumerable<UserShow>>(list.UserShowsList)));
-            });
-            var userShows = Mapper.Map<UserShowsViewDTO, UserShowsViewModel>(db.GetUsersShows(USER_ID));
+                userShows.UserShowsList.Add(new UserShow
+                {
+                    ShowId = show.ShowId,
+                    Name = show.Name,
+                    Season = show.Season,
+                    Episode = show.Episode,
+                    ShowEpisodeId = show.ShowEpisodeId
+                });
+            }
 
             return View(userShows);
         }
@@ -76,13 +80,21 @@ namespace TvShows.WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Mapper.Initialize(cfg => cfg.CreateMap<ShowEpisodeDTO, ShowEpisodeViewModel>());
-            ShowEpisodeViewModel showEpisode = Mapper.Map<ShowEpisodeViewModel>(db.GetShowEpisode(id.Value));
+            var dbShowEpisode = db.GetShowEpisode(id.Value);
 
-            if (showEpisode == null)
+            if (dbShowEpisode == null)
             {
                 return HttpNotFound();
             }
+
+            var showEpisode = new ShowEpisodeViewModel
+            {
+                Id = dbShowEpisode.Id,
+                UserId = dbShowEpisode.UserId,
+                ShowId = dbShowEpisode.ShowId,
+                Episode = dbShowEpisode.Episode,
+                Season = dbShowEpisode.Season
+            };
 
             ViewBag.Name = name;
             return View(showEpisode);
@@ -90,7 +102,7 @@ namespace TvShows.WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShowEpisodeId,UserId,ShowId,Season,Episode")] ShowEpisodeViewModel showEpisode)
+        public ActionResult Edit([Bind(Include = "Id,UserId,ShowId,Season,Episode")] ShowEpisodeViewModel showEpisode)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +115,6 @@ namespace TvShows.WEB.Controllers
         }
 
         // GET: ShowEpisodes/Delete/5
-        [Authorize()]
         public ActionResult Delete(int? id, string name)
         {
             if (id == null)
@@ -111,20 +122,28 @@ namespace TvShows.WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Mapper.Initialize(cfg => cfg.CreateMap<ShowEpisodeDTO, ShowEpisodeViewModel>());
-            ShowEpisodeViewModel showEpisode = Mapper.Map<ShowEpisodeViewModel>(db.GetShowEpisode(id.Value));
-            if (showEpisode == null)
+            var dbShowEpisode = db.GetShowEpisode(id.Value);
+            if (dbShowEpisode == null)
             {
                 return HttpNotFound();
             }
+
+            var showEpisode = new ShowEpisodeViewModel
+            {
+                Id = dbShowEpisode.Id,
+                ShowId = dbShowEpisode.ShowId,
+                UserId = dbShowEpisode.UserId,
+                Season = dbShowEpisode.Season,
+                Episode = dbShowEpisode.Episode
+            };
             ViewBag.Name = name;
+
             return View(showEpisode);
         }
 
         // POST: ShowEpisodes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize()]
         public ActionResult DeleteConfirmed(int id)
         {
             db.Delete(id);

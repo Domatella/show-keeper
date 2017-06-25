@@ -20,12 +20,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Мои сериалы", "Index", "ShowEpisodes")</li>
-                        <li>@Html.ActionLink("Список сериалов", "Index", "Shows")</li>
-                        <li>@Html.ActionLink("Подписки", "Index", "Subscriptions")</li>
-                    }
+                    <li>@Html.ActionLink("Мои сериалы", "Index", "ShowEpisodes")</li>
+                    <li>@Html.ActionLink("Список сериалов", "Index", "Show")</li>
+                    <li>@Html.ActionLink("Подписки", "Index", "Subscriptions")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="@Url.Action("Basket", "Subscriptions", new { subscriptionId = -1 })">Корзина</a></li>
