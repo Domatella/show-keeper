@@ -13,6 +13,6 @@ namespace TvShows.DAL.Entities
 
         [Required]
         public int PurchaseId { get; set; }
-        public int SubsciptionId { get; set; }
+        public int SubscriptionId { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using TvShows.BLL.DTO;
 
 namespace TvShows.BLL.Interfaces
 {
-    public interface IShowsEpisodeService
+    public interface IShowsService
     {
         ShowDTO GetShow(int id);
         IEnumerable<ShowDTO> GetShows();

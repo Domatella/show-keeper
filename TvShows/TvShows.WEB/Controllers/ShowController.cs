@@ -13,8 +13,8 @@ namespace TvShows.WEB.Controllers
 {
     public class ShowController : Controller
     {
-        private IShowsEpisodeService db { get; set; }
-        public ShowController(IShowsEpisodeService showsService)
+        private IShowsService db { get; set; }
+        public ShowController(IShowsService showsService)
         {
             db = showsService;
         }

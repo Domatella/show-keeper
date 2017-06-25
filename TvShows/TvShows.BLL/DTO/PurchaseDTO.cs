@@ -13,8 +13,6 @@ namespace TvShows.BLL.DTO
 
         [Required]
         public int UserId { get; set; }
-
-        public int ItemsQuantity { get; set; }
         public bool IsPaid { get; set; }
     }
 }

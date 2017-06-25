@@ -15,6 +15,7 @@ namespace TvShows.WEB.Models
         public string ImageUrl { get; set; }
 
         [Display(Name = "Цена")]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
     }
 }

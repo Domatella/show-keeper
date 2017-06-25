@@ -166,6 +166,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ShowController.cs" />
     <Compile Include="Controllers\ShowEpisodesController.cs" />
+    <Compile Include="Controllers\SubscriptionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,6 +223,9 @@
     <Content Include="Views\ShowEpisodes\Create.cshtml" />
     <Content Include="Views\ShowEpisodes\Edit.cshtml" />
     <Content Include="Views\ShowEpisodes\Delete.cshtml" />
+    <Content Include="Views\Subscriptions\Index.cshtml" />
+    <Content Include="Views\Subscriptions\Basket.cshtml" />
+    <Content Include="Views\Subscriptions\Purchasing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

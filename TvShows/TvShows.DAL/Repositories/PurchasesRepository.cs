@@ -39,7 +39,14 @@ namespace TvShows.DAL.Repositories
 
         public Purchase Get(int userId)
         {
-            return db.Purchases.Single(p => (p.UserId == userId) && !p.IsPaid);
+            try
+            {
+                return db.Purchases.Single(p => (p.UserId == userId) && !p.IsPaid);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Purchase> GetAll()

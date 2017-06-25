@@ -54,6 +54,32 @@ namespace TvShows.WEB.Controllers
 
         public ActionResult Create(int showId, string showName)
         {
+            var dbUserShows = db.GetUsersShows(USER_ID);
+            var userShows = new UserShowsViewModel() { UserId = dbUserShows.UserId };
+            var showIds = new List<int>();
+
+            foreach (var show in dbUserShows.UserShowsList)
+            {
+                userShows.UserShowsList.Add(new UserShow
+                {
+                    ShowId = show.ShowId,
+                    Name = show.Name,
+                    Season = show.Season,
+                    Episode = show.Episode,
+                    ShowEpisodeId = show.ShowEpisodeId
+                });
+                showIds.Add(show.ShowId);
+            }
+
+            if (showIds.Contains(showId))
+            {
+                return RedirectToAction("Edit", new
+                {
+                    id = userShows.UserShowsList.Single(us => us.ShowId == showId).ShowEpisodeId,
+                    name = showName
+                });
+            }
+
             ViewBag.ShowId = showId;
             ViewBag.ShowName = showName;
             return View();

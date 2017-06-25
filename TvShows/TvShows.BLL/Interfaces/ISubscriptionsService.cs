@@ -13,6 +13,13 @@ namespace TvShows.BLL.Interfaces
         IEnumerable<SubscriptionDTO> GetAll();
         BasketDTO GetBasket(int userId);
         void Create(SubscriptionDTO subscription);
+        PurchaseDTO GetCurrentPurchase(int userId);
+        void AddPurchase(int userId);
+        void UpdatePurchase(PurchaseDTO purchase);
+        void PayPurchase(int purchaseId);
+        void DeletePurchase(int purchaseId);
+        void AddUserSubscription(int purchaseId, int subscriptionId);
+        void DeleteUserSubscription(int purchaseId, int subscriptionId);
         void Update(SubscriptionDTO subscription);
         void Delete(int id);
         void Dispose();
