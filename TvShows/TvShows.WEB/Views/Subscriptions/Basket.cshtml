@@ -1,0 +1,52 @@
+﻿@model TvShows.WEB.Models.BasketViewModel
+
+@{
+    ViewBag.Title = "Корзина";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+
+        @if (Model != null)
+        {
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SubscriptionsList.First().Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SubscriptionsList.First().Price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.SubscriptionsList)
+                {
+                    <tr>
+                        <td>
+                            <img src="@item.ImageUrl" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Удалить из корзины", "DeleteFromBasket", new { subscriptionId = item.Id})
+                        </td>
+                    </tr>
+                  }
+            </table>
+            <p>Итого: @Model.SubscriptionsList.Sum(s => s.Price)</p>
+            <a href="@Url.Action("Purchasing")" class="btn btn-success">Купить</a>
+        }
+        else
+        {
+            <p>В корзине пусто</p>
+        }
+        <p>@Html.ActionLink("Вернуться к покупкам", "Index")</p>
+    </div>
+</div>
