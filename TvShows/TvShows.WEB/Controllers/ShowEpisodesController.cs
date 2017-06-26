@@ -89,13 +89,14 @@ namespace TvShows.WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,UserId,ShowId,Season,Episode")] ShowEpisodeViewModel showEpisode)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && isQuantityValid(showEpisode))
             {
                 Mapper.Initialize(cfg => cfg.CreateMap<ShowEpisodeViewModel, ShowEpisodeDTO>());
                 db.Create(Mapper.Map<ShowEpisodeDTO>(showEpisode));
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ErrorMessage = "Введены неверные значения";
             return View(showEpisode);
         }
 
@@ -130,13 +131,14 @@ namespace TvShows.WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,UserId,ShowId,Season,Episode")] ShowEpisodeViewModel showEpisode)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && isQuantityValid(showEpisode))
             {
                 Mapper.Initialize(cfg => cfg.CreateMap<ShowEpisodeViewModel, ShowEpisodeDTO>());
                 db.Update(Mapper.Map<ShowEpisodeDTO>(showEpisode));
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ErrorMessage = "Введены неверные значения";
             return View(showEpisode);
         }
 
@@ -174,6 +176,22 @@ namespace TvShows.WEB.Controllers
         {
             db.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        private bool isQuantityValid(ShowEpisodeViewModel showEpisode)
+        {
+            var dbShow = db.GetShow(showEpisode.ShowId);
+            if (showEpisode.Season < 1 || showEpisode.Season > dbShow.Seasons)
+            {
+                return false;
+            }
+
+            if (showEpisode.Episode < 1 || showEpisode.Episode > dbShow.Episodes)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         protected override void Dispose(bool disposing)

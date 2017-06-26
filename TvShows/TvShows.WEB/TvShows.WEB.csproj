@@ -164,6 +164,7 @@
     <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\PurchasingController.cs" />
     <Compile Include="Controllers\ShowController.cs" />
     <Compile Include="Controllers\ShowEpisodesController.cs" />
     <Compile Include="Controllers\SubscriptionsController.cs" />
@@ -224,8 +225,8 @@
     <Content Include="Views\ShowEpisodes\Edit.cshtml" />
     <Content Include="Views\ShowEpisodes\Delete.cshtml" />
     <Content Include="Views\Subscriptions\Index.cshtml" />
-    <Content Include="Views\Subscriptions\Basket.cshtml" />
-    <Content Include="Views\Subscriptions\Purchasing.cshtml" />
+    <Content Include="Views\Purchasing\Index.cshtml" />
+    <Content Include="Views\Purchasing\Purchasing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -85,5 +85,11 @@ namespace TvShows.BLL.Services
             db.ShowEpisodes.Update(Mapper.Map<ShowEpisode>(showEpisode));
             db.Save();
         }
+
+        public ShowDTO GetShow(int showId)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<Show, ShowDTO>());
+            return Mapper.Map<ShowDTO>(db.Shows.Get(showId));
+        }
     }
 }
