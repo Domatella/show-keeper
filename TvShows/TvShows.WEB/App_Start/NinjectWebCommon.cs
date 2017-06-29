@@ -32,7 +32,7 @@ namespace TvShows.WEB.App_Start
 
         private static IKernel CreateKernel()
         {
-            var modules = new INinjectModule[] { new ServiceModule("DefaultConnection") };
+            var modules = new INinjectModule[] { new ServiceModule("KeeperContext") };
             var kernel = new StandardKernel(modules);
             try
             {
